@@ -50,7 +50,7 @@ const routes = [
     key: "users",
     icon: <Icon fontSize="small">people</Icon>,
     route: "/users",
-    component: <Profile />,
+    component: <Tables />,
   },
   {
     type: "collapse",
@@ -93,7 +93,7 @@ const routes = [
     component: <Profile />,
   },
   {
-    type: "collapse",
+    type: "link",
     name: "Tables",
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,
@@ -101,7 +101,7 @@ const routes = [
     component: <Tables />,
   },
   {
-    type: "collapse",
+    type: "link",
     name: "Billing",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
@@ -117,7 +117,7 @@ const routes = [
   //   component: <RTL />,
   // },
   {
-    type: "collapse",
+    type: "link",
     name: "Notifications",
     key: "notifications",
     icon: <Icon fontSize="small">notifications</Icon>,
@@ -129,15 +129,16 @@ const routes = [
     name: "Sign In",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
-    route: "/authentication/sign-in",
+    route: "/",
     component: <SignIn />,
   },
+
   {
     type: "link",
     name: "Sign Up",
     key: "sign-up",
     icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
+    route: "/register",
     component: <SignUp />,
   },
 ];

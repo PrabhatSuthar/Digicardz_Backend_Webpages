@@ -30,6 +30,7 @@ import {
   setTransparentSidenav,
   setWhiteSidenav,
 } from "context";
+import MDButton from "components/MDButton";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
@@ -163,7 +164,11 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       />
       <List>{renderRoutes}</List>
-      
+      <MDBox p={2} mt="auto">
+        <MDButton component="button" variant="gradient" color="primary" fullWidth>
+          LogOut
+        </MDButton>
+      </MDBox>
     </SidenavRoot>
   );
 }
