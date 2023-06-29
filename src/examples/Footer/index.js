@@ -1,5 +1,3 @@
-
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -61,7 +59,6 @@ function Footer({ company, links }) {
         </Link>
         for a better web.
       </MDBox>
-      
     </MDBox>
   );
 }
@@ -69,7 +66,6 @@ function Footer({ company, links }) {
 // Setting default values for the props of Footer
 Footer.defaultProps = {
   company: { href: "#", name: "DIGICADZ" },
-  
 };
 
 // Typechecking props for the Footer

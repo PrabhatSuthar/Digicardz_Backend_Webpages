@@ -16,7 +16,8 @@
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
+import Users from "layouts/users";
+import Social from "layouts/socials";
 import Billing from "layouts/billing";
 // import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
@@ -50,7 +51,7 @@ const routes = [
     key: "users",
     icon: <Icon fontSize="small">people</Icon>,
     route: "/users",
-    component: <Tables />,
+    component: <Users />,
   },
   {
     type: "collapse",
@@ -58,7 +59,7 @@ const routes = [
     key: "social",
     icon: <Icon fontSize="small">interests</Icon>,
     route: "/social",
-    component: <Profile />,
+    component: <Social />,
   },
   {
     type: "collapse",
@@ -98,7 +99,7 @@ const routes = [
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/tables",
-    component: <Tables />,
+    component: <Users />,
   },
   {
     type: "link",

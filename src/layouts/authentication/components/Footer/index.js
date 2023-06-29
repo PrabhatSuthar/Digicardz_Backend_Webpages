@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types";
 
 // @mui material components
@@ -19,31 +18,28 @@ function Footer({ light }) {
   return (
     <MDBox position="absolute" width="100%" bottom={0} py={4}>
       <Container>
-        
-          <MDBox
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexWrap="wrap"
-            color={light ? "white" : "text"}
-            fontSize={size.sm}
-          >
-            &copy; {new Date().getFullYear()}, made with
-            <MDBox fontSize={size.md} color={light ? "white" : "dark"} mb={-0.5} mx={0.25}>
-              <Icon color="inherit" fontSize="inherit">
-                favorite
-              </Icon>
-            </MDBox>
-            by
-            <Link href="https://www.creative-tim.com/" target="_blank">
-              <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
-                &nbsp;DIGICARDZ&nbsp;
-              </MDTypography>
-            </Link>
-            for a better web.
+        <MDBox
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexWrap="wrap"
+          color={light ? "white" : "text"}
+          fontSize={size.sm}
+        >
+          &copy; {new Date().getFullYear()}, made with
+          <MDBox fontSize={size.md} color={light ? "white" : "dark"} mb={-0.5} mx={0.25}>
+            <Icon color="inherit" fontSize="inherit">
+              favorite
+            </Icon>
           </MDBox>
-         
-        
+          by
+          <Link href="https://www.creative-tim.com/" target="_blank">
+            <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
+              &nbsp;DIGICARDZ&nbsp;
+            </MDTypography>
+          </Link>
+          for a better web.
+        </MDBox>
       </Container>
     </MDBox>
   );
