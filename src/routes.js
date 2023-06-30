@@ -18,6 +18,10 @@
 import Dashboard from "layouts/dashboard";
 import Users from "layouts/users";
 import Social from "layouts/socials";
+import Gallery from "layouts/gallery";
+import Products from "layouts/products";
+import Inquiry from "layouts/inquiry";
+import Payment from "layouts/payment";
 import Billing from "layouts/billing";
 // import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
@@ -67,7 +71,7 @@ const routes = [
     key: "gallery",
     icon: <Icon fontSize="small">collections</Icon>,
     route: "/gallery",
-    component: <Profile />,
+    component: <Gallery />,
   },
   {
     type: "collapse",
@@ -75,7 +79,7 @@ const routes = [
     key: "products",
     icon: <Icon fontSize="small">inventory</Icon>,
     route: "/products",
-    component: <Profile />,
+    component: <Products />,
   },
   {
     type: "collapse",
@@ -83,7 +87,7 @@ const routes = [
     key: "inquiry",
     icon: <Icon fontSize="small">question_answer</Icon>,
     route: "/inquiry",
-    component: <Profile />,
+    component: <Inquiry />,
   },
   {
     type: "collapse",
@@ -91,7 +95,7 @@ const routes = [
     key: "payment",
     icon: <Icon fontSize="small">account_balance</Icon>,
     route: "/payment",
-    component: <Profile />,
+    component: <Payment />,
   },
   {
     type: "link",

@@ -44,8 +44,10 @@ const rowData = [
 
 function Tables() {
   const [initData, setInitData] = useState(rowData);
-  const tempObj = { social: "", url: "" };
+  const sampleObj = { social: "", url: "" };
   const [rows, setRows] = useState([]);
+  const [newData, setNewData] = useState(sampleObj);
+  const [add, setAdd] = useState(false);
   let initTableState = new Array(initData.length).fill(false);
   const [tableState, setTableState] = useState(initTableState);
 
@@ -54,7 +56,7 @@ function Tables() {
       social: tableState[index] ? (
         <MDInput
           label="User Name"
-          onKeyUp={(event) => detailsContent(index, event, "social")}
+          onKeyUp={(event) => handleOnChange(index, event, "social")}
           defaultValue={i.social}
         />
       ) : (
@@ -65,7 +67,7 @@ function Tables() {
       url: tableState[index] ? (
         <MDInput
           label="Designation"
-          onKeyUp={(event) => detailsContent(index, event, "url")}
+          onKeyUp={(event) => handleOnChange(index, event, "url")}
           defaultValue={i.url}
         />
       ) : (
@@ -74,46 +76,58 @@ function Tables() {
         </MDTypography>
       ),
       action: (
-        <MDBox>
-          <MDButton
-            variant="text"
-            onClick={() => detailsShow(index)}
-            color="error"
-            fontWeight="medium"
-          >
-            Delete
-          </MDButton>
+        <>
           {tableState[index] ? (
-            <MDButton
-              ml={5}
-              variant="text"
-              onClick={() => detailsHide(index)}
-              color="dark"
-              fontWeight="medium"
-            >
-              Save
-            </MDButton>
+            <MDBox>
+              <MDButton
+                variant="text"
+                onClick={() => handleCancel(index)}
+                color="warning"
+                fontWeight="medium"
+              >
+                Cancel
+              </MDButton>
+              <MDButton
+                ml={5}
+                variant="text"
+                onClick={() => handleSave(index)}
+                color="dark"
+                fontWeight="medium"
+              >
+                Save
+              </MDButton>
+            </MDBox>
           ) : (
-            <MDButton
-              ml={5}
-              variant="text"
-              onClick={() => detailsShow(index)}
-              color="dark"
-              fontWeight="medium"
-            >
-              Edit
-            </MDButton>
+            <MDBox>
+              <MDButton
+                variant="text"
+                onClick={() => handleDelete(index)}
+                color="error"
+                fontWeight="medium"
+              >
+                Delete
+              </MDButton>
+              <MDButton
+                ml={5}
+                variant="text"
+                onClick={() => handleEdit(index)}
+                color="dark"
+                fontWeight="medium"
+              >
+                Edit
+              </MDButton>
+            </MDBox>
           )}
-        </MDBox>
+        </>
       ),
     }));
   };
 
   useEffect(() => {
     setRows(getRows(initData));
-  }, [rows, initData]);
+  }, [tableState, initData]);
 
-  const detailsShow = (index) => {
+  const handleEdit = (index) => {
     setTableState((tableState) => {
       const nextTableState = [...tableState];
       nextTableState[index] = true;
@@ -121,7 +135,7 @@ function Tables() {
     });
   };
 
-  const detailsHide = (index) => {
+  const handleSave = (index) => {
     setTableState((tableState) => {
       const nextTableState = [...tableState];
       nextTableState[index] = false;
@@ -129,7 +143,30 @@ function Tables() {
     });
   };
 
-  const detailsContent = (index, e, key) => {
+  const handleCancel = (index) => {
+    setTableState((tableState) => {
+      const nextTableState = [...tableState];
+      nextTableState[index] = false;
+      return nextTableState;
+    });
+  };
+
+  const handleDelete = (index) => {
+    setInitData((prev) => {
+      const temp = [...prev];
+      temp.splice(index, 1);
+      return temp;
+    });
+    // console.log("rows =>", rows);
+
+    setTableState((tableState) => {
+      const nextTableState = [...tableState];
+      nextTableState[index] = false;
+      return nextTableState;
+    });
+  };
+
+  const handleOnChange = (index, e, key) => {
     setInitData((prev) => {
       const temp = [...prev];
       temp[index][key] = e.target.value;
@@ -137,13 +174,19 @@ function Tables() {
     });
   };
 
-  const addItem = () => {
-    // setAddIndex(initData.length + 1);
+  const addAccount = () => {
     setInitData((prev) => {
       const temp = [...prev];
-      temp.push(tempObj);
+      temp.push(newData);
       return temp;
     });
+
+    setNewData(sampleObj);
+    setAdd(false);
+  };
+
+  const altHandleChange = (e, key) => {
+    setNewData((prev) => ({ ...prev, [key]: e.target.value }));
   };
 
   return (
@@ -159,15 +202,59 @@ function Tables() {
                     Social Accounts
                   </MDTypography>
                 </MDBox>
-                <MDBox color="text" px={2}>
-                  <MDButton variant="gradient" onClick={() => addItem()} color="primary">
-                    Add User
-                  </MDButton>
+                <MDBox>
+                  {add ? (
+                    <>
+                      <MDInput
+                        label="Account Name"
+                        onKeyUp={(event) => altHandleChange(event, "social")}
+                        sx={{ marginRight: "15px", marginLeft: "15px" }}
+                      />
+                      <MDInput
+                        label="URL"
+                        onKeyUp={(event) => altHandleChange(event, "url")}
+                        sx={{ marginRight: "15px", marginLeft: "15px" }}
+                      />
+                      <MDButton
+                        variant="gradient"
+                        sx={{ marginRight: "15px" }}
+                        onClick={() => addAccount()}
+                        color="primary"
+                      >
+                        Add
+                      </MDButton>
+                      <MDButton variant="outlined" onClick={() => setAdd(false)} color="error">
+                        cancel
+                      </MDButton>
+                    </>
+                  ) : (
+                    <MDButton variant="gradient" onClick={() => setAdd(true)} color="primary">
+                      Add Account
+                    </MDButton>
+                  )}
                 </MDBox>
               </MDBox>
               <MDBox>
                 {rows === [] ? (
-                  <MDTypography variant="caption">Loading ...</MDTypography>
+                  <MDTypography
+                    variant="caption"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    py={3}
+                  >
+                    Loading ...
+                  </MDTypography>
+                ) : rows.length === 0 ? (
+                  <MDTypography
+                    variant="caption"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    py={3}
+                  >
+                    No Data Available
+                  </MDTypography>
                 ) : (
                   <DataTable
                     table={{ columns, rows }}
